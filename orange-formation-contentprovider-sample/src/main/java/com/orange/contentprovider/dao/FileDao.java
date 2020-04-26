@@ -1,4 +1,4 @@
-package com.orange.contentprovider.db;
+package com.orange.contentprovider.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("me.guendouz.livedata_recyclerview", appContext.getPackageName());
+        assertEquals("com.orange.contentprovider", appContext.getPackageName());
     }
 }

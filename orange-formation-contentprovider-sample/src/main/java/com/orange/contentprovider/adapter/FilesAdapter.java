@@ -1,6 +1,7 @@
-package com.orange.contentprovider;
+package com.orange.contentprovider.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-import com.orange.contentprovider.db.File;
+import com.orange.contentprovider.R;
+import com.orange.contentprovider.model.File;
+import com.orange.contentprovider.ui.FileDetailsActivity;
 
 /**
  * Created by jaouher on 25/04/2020.
@@ -75,6 +79,8 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FileViewHold
         FileViewHolder(View itemView) {
             super(itemView);
 
+
+
             tvFileName = itemView.findViewById(R.id.tvFileName);
             tvPath = itemView.findViewById(R.id.tvPath);
             tvType = itemView.findViewById(R.id.tvType);
@@ -89,6 +95,12 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FileViewHold
                 btnDelete.setOnClickListener(v -> {
                     if (onDeleteButtonClickListener != null)
                         onDeleteButtonClickListener.onDeleteButtonClicked(file);
+                });
+
+                itemView.setOnClickListener(v -> {
+                    Intent i = new Intent(context, FileDetailsActivity.class);
+                    i.putExtra("file_key", file);
+                    context.startActivity(i);
                 });
 
             }

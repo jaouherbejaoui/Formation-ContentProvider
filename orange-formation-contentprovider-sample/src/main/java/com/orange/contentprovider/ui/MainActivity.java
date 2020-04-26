@@ -1,4 +1,4 @@
-package com.orange.contentprovider;
+package com.orange.contentprovider.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
-import com.orange.contentprovider.db.File;
+import com.orange.contentprovider.viewmodel.FileViewModel;
+import com.orange.contentprovider.adapter.FilesAdapter;
+import com.orange.contentprovider.R;
+import com.orange.contentprovider.model.File;
 
 
 public class MainActivity extends AppCompatActivity implements FilesAdapter.OnDeleteButtonClickListener {
@@ -61,6 +64,5 @@ public class MainActivity extends AppCompatActivity implements FilesAdapter.OnDe
     @Override
     public void onDeleteButtonClicked(File file) {
         fileViewModel.deleteFile(file);
-
     }
 }

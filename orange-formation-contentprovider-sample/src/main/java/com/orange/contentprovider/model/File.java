@@ -1,14 +1,16 @@
-package com.orange.contentprovider.db;
+package com.orange.contentprovider.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+
+import java.io.Serializable;
 
 /**
  * Created by jaouher on 25/04/2020.
  */
 
 @Entity
-public class File {
+public class File implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String fileName;
@@ -56,5 +58,15 @@ public class File {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "id=" + id +
+                ", fileName='" + fileName + '\'' +
+                ", path='" + path + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

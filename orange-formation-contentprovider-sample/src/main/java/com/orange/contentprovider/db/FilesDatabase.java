@@ -7,12 +7,15 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.orange.contentprovider.dao.FileDao;
+import com.orange.contentprovider.model.File;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 /**
- * Created by guendouz on 15/02/2018.
+ * Created by jaouher on 25/04/2020.
  */
 
 @Database(entities = {File.class}, version = 1)

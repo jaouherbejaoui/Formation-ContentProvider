@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LiveDataRecyclerView.iml" filepath="$PROJECT_DIR$/LiveDataRecyclerView.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/orange-formation-contentprovider-sample/app.iml" filepath="$PROJECT_DIR$/orange-formation-contentprovider-sample/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/livedata-recyclerview-sample.iml" filepath="$PROJECT_DIR$/livedata-recyclerview-sample.iml" group="livedata-recyclerview-sample" />
+      <module fileurl="file://$PROJECT_DIR$/orange-formation-contentprovider-sample/orange-formation-contentprovider-sample.iml" filepath="$PROJECT_DIR$/orange-formation-contentprovider-sample/orange-formation-contentprovider-sample.iml" group="livedata-recyclerview-sample/orange-formation-contentprovider-sample" />
     </modules>
   </component>
 </project>

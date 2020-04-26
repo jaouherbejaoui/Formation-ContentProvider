@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "me.guendouz.livedata_recyclerview"
+        applicationId "com.orange.contentprovider"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
