@@ -1,13 +1,16 @@
 package com.orange.contentprovider.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +19,7 @@ import java.util.List;
 
 
 import com.orange.contentprovider.R;
-import com.orange.contentprovider.model.File;
-import com.orange.contentprovider.ui.FileDetailsActivity;
+import com.orange.contentprovider.model.FileModel;
 
 /**
  * Created by jaouher on 25/04/2020.
@@ -26,10 +28,10 @@ import com.orange.contentprovider.ui.FileDetailsActivity;
 public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FileViewHolder> {
 
     public interface OnDeleteButtonClickListener {
-        void onDeleteButtonClicked(File file);
+        void onDeleteButtonClicked(FileModel fileModel);
     }
 
-    private List<File> data;
+    private List<FileModel> data;
     private Context context;
     private LayoutInflater layoutInflater;
     private OnDeleteButtonClickListener onDeleteButtonClickListener;
@@ -57,7 +59,7 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FileViewHold
         return data.size();
     }
 
-    public void setData(List<File> newData) {
+    public void setData(List<FileModel> newData) {
         if (data != null) {
             FileDiffCallback fileDiffCallback = new FileDiffCallback(data, newData);
             DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(fileDiffCallback);
@@ -74,11 +76,10 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FileViewHold
     class FileViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvFileName, tvPath, tvType;
-        private Button btnDelete;
+        private AppCompatImageButton btnDelete;
 
         FileViewHolder(View itemView) {
             super(itemView);
-
 
 
             tvFileName = itemView.findViewById(R.id.tvFileName);
@@ -87,54 +88,80 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FileViewHold
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }
 
-        void bind(final File file) {
-            if (file != null) {
-                tvFileName.setText(file.getFileName());
-                tvPath.setText(file.getPath());
-                tvType.setText(file.getType());
+        void bind(final FileModel fileModel) {
+            if (fileModel != null) {
+                tvFileName.setText(fileModel.getFileName());
+                tvPath.setText(fileModel.getPath());
+                tvType.setText(fileModel.getType());
                 btnDelete.setOnClickListener(v -> {
                     if (onDeleteButtonClickListener != null)
-                        onDeleteButtonClickListener.onDeleteButtonClicked(file);
+                        onDeleteButtonClickListener.onDeleteButtonClicked(fileModel);
                 });
 
                 itemView.setOnClickListener(v -> {
-                    Intent i = new Intent(context, FileDetailsActivity.class);
-                    i.putExtra("file_key", file);
-                    context.startActivity(i);
+
+                    showCustomDialog(fileModel);
                 });
 
             }
         }
 
+
+        public void showCustomDialog(FileModel file) {
+            // custom dialog
+            final Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.dialog_file_details);
+
+            // set the custom dialog components - text, image and button
+            TextView text = dialog.findViewById(R.id.tvFileName);
+            text.setText(file.getFileName());
+
+            ImageView image = dialog.findViewById(R.id.ivFile);
+            image.setImageBitmap(BitmapFactory.decodeFile(file.getPath()));
+
+            Button dialogButton = (Button) dialog.findViewById(R.id.btnShare);
+            // if button is clicked, close the custom dialog
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    Toast.makeText(context, "share", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            dialog.show();
+        }
+
+
     }
 
     class FileDiffCallback extends DiffUtil.Callback {
 
-        private final List<File> oldFiles, newFiles;
+        private final List<FileModel> oldFileModels, newFileModels;
 
-        public FileDiffCallback(List<File> oldFiles, List<File> newFiles) {
-            this.oldFiles = oldFiles;
-            this.newFiles = newFiles;
+        public FileDiffCallback(List<FileModel> oldFileModels, List<FileModel> newFileModels) {
+            this.oldFileModels = oldFileModels;
+            this.newFileModels = newFileModels;
         }
 
         @Override
         public int getOldListSize() {
-            return oldFiles.size();
+            return oldFileModels.size();
         }
 
         @Override
         public int getNewListSize() {
-            return newFiles.size();
+            return newFileModels.size();
         }
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            return oldFiles.get(oldItemPosition).getId() == newFiles.get(newItemPosition).getId();
+            return oldFileModels.get(oldItemPosition).getId() == newFileModels.get(newItemPosition).getId();
         }
 
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            return oldFiles.get(oldItemPosition).equals(newFiles.get(newItemPosition));
+            return oldFileModels.get(oldItemPosition).equals(newFileModels.get(newItemPosition));
         }
     }
 }
