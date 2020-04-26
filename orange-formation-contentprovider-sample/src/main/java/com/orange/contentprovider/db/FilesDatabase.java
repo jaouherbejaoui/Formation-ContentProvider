@@ -8,7 +8,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.orange.contentprovider.dao.FileDao;
-import com.orange.contentprovider.model.File;
+import com.orange.contentprovider.model.FileModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,15 +18,15 @@ import java.util.concurrent.Executors;
  * Created by jaouher on 25/04/2020.
  */
 
-@Database(entities = {File.class}, version = 1)
+@Database(entities = {FileModel.class}, version = 1)
 public abstract class FilesDatabase extends RoomDatabase {
 
     private static FilesDatabase INSTANCE;
 
-    private final static List<File> FILES_ARRAYS = Arrays.asList(
-            new File("filename1", "path1", "type1"),
-            new File("filename2", "path2", "type2"),
-            new File("filename3", "path3", "type3")
+    private final static List<FileModel> FILES_ARRAYS = Arrays.asList(
+            new FileModel("filename1", "path1", "type1"),
+            new FileModel("filename2", "path2", "type2"),
+            new FileModel("filename3", "path3", "type3")
     );
 
     public abstract FileDao postDao();

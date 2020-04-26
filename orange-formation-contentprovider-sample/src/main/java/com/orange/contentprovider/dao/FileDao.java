@@ -8,7 +8,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.orange.contentprovider.model.File;
+import com.orange.contentprovider.model.FileModel;
 
 import java.util.List;
 
@@ -20,20 +20,20 @@ import java.util.List;
 public interface FileDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveAll(List<File> files);
+    void saveAll(List<FileModel> fileModels);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void save(File file);
+    void save(FileModel fileModel);
 
     @Update
-    void update(File file);
+    void update(FileModel fileModel);
 
     @Delete
-    void delete(File file);
+    void delete(FileModel fileModel);
 
-    @Query("SELECT * FROM File")
-    LiveData<List<File>> findAll();
+    @Query("SELECT * FROM FileModel")
+    LiveData<List<FileModel>> findAll();
 
-    @Query("SELECT * FROM File where id = :id")
-    File findFile(int id);
+    @Query("SELECT * FROM FileModel where id = :id")
+    FileModel findFile(int id);
 }

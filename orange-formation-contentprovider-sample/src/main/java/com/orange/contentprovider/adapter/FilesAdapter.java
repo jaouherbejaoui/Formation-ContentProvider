@@ -99,8 +99,7 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FileViewHold
                 });
 
                 itemView.setOnClickListener(v -> {
-
-                    showCustomDialog(fileModel);
+                    Toast.makeText(context, fileModel.getFileName(), Toast.LENGTH_SHORT).show();
                 });
 
             }

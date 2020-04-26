@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.orange.contentprovider.model.File;
+import com.orange.contentprovider.model.FileModel;
 import com.orange.contentprovider.db.FilesDatabase;
 import com.orange.contentprovider.dao.FileDao;
 
@@ -28,15 +28,15 @@ public class FileViewModel extends AndroidViewModel {
         executorService = Executors.newSingleThreadExecutor();
     }
 
-    public LiveData<List<File>> getAllFiles() {
+    public LiveData<List<FileModel>> getAllFiles() {
         return fileDao.findAll();
     }
 
-    public void saveFile(File file) {
-        executorService.execute(() -> fileDao.save(file));
+    public void saveFile(FileModel fileModel) {
+        executorService.execute(() -> fileDao.save(fileModel));
     }
 
-    public void deleteFile(File post) {
+    public void deleteFile(FileModel post) {
         executorService.execute(() -> fileDao.delete(post));
     }
 }

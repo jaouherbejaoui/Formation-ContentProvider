@@ -10,18 +10,18 @@ import java.io.Serializable;
  */
 
 @Entity
-public class File implements Serializable {
+public class FileModel implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String fileName;
     private String path;
     private String type;
 
-    public File() {
+    public FileModel() {
     }
 
     //Constructor
-    public File(String fileName, String path, String type) {
+    public FileModel(String fileName, String path, String type) {
         this.fileName = fileName;
         this.path = path;
         this.type = type;
